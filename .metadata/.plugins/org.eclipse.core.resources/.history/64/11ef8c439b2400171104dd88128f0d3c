@@ -1,0 +1,23 @@
+package service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import dao.GroupsDao;
+import entity.Groups;
+
+@Service
+@Transactional
+public class GroupsServiceImpl implements GroupsService{
+
+	@Autowired
+	@Qualifier("groupsDaoImpl")
+	GroupsDao groupsDao;
+	
+	public Groups get(int id){
+		return groupsDao.get(Groups.class, id);
+	}
+}

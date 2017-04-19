@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+tracingEnabled=false
+tracingMaxFileCount=10
+tracingMaxFileSize=1000
+tracingOutputStandard=false

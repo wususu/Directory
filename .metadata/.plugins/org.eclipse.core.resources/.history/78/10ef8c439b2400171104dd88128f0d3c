@@ -1,0 +1,8 @@
+package service;
+
+import entity.Groups;
+
+public interface GroupsService {
+	
+	public Groups get(int id);
+}

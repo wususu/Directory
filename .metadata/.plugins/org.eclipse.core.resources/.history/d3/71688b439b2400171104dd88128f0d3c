@@ -1,0 +1,45 @@
+package controller;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import entity.Contacter;
+import entity.Groups;
+import service.ContacterService;
+import service.GroupsService;
+
+@Controller
+public class TestController {
+	
+	@Autowired
+	@Qualifier("contacterServiceImpl")
+	ContacterService contacterService;
+	
+	@Autowired
+	@Qualifier("groupsServiceImpl")
+	GroupsService groupsService;
+	
+	private static final Log logger = LogFactory.getLog(TestController.class);
+	
+	@RequestMapping(value = "/test_contacter")
+	public void testContacter(){
+		logger.info("father, i'am in");
+		Contacter contacter = contacterService.get(1);
+		System.out.println(contacter);
+		System.out.println(contacter.getName());getClass();
+		Groups groups = groupsService.get(1);
+		System.out.println(groups.getName());
+//		HashSet<Groups> groupsSet = contacter.getGroups();
+//		Integer size = groupsSet.size();
+//		System.out.println(size);
+		logger.info("daddy,i'am out");
+	}
+
+}

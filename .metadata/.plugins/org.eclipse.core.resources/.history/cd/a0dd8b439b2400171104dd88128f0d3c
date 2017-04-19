@@ -1,0 +1,10 @@
+package dao;
+
+import org.springframework.stereotype.Repository;
+
+import entity.Contacter;
+
+@Repository
+public class ContacterDaoImpl extends BaseDaoHibernate5<Contacter> implements ContacterDao{
+
+}

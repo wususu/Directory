@@ -1,0 +1,11 @@
+package service;
+
+import org.springframework.stereotype.Service;
+
+import entity.Contacter;
+
+@Service
+public interface ContacterService {
+	
+	Contacter get(int id);
+}

@@ -1,0 +1,62 @@
+package entity;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "groups")
+public class Groups implements Serializable{
+
+	private static final long serialVersionUID = 5234L;
+	
+	@Column(name = "id")
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name = "name")
+	private String name;
+	
+	private Set<Contacter> contacters = new HashSet<Contacter>();
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int  getId() {
+		return id;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public Groups() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Groups(String name){
+		this.name = name;
+	}
+	
+	@ManyToMany(mappedBy = "groups")
+	public Set<Contacter> getContacters() {
+		return contacters;
+	}
+	
+	public void setContacters(HashSet<Contacter> contacters) {
+		this.contacters = contacters;
+	}
+}

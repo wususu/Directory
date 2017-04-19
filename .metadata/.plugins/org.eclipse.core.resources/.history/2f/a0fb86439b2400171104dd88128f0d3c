@@ -1,0 +1,24 @@
+2017-04-19 08:53:26,583 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com:learn6:0.0.1-SNAPSHOT @ /home/janke/workspace/learn6/pom.xml.
+2017-04-19 08:53:26,589 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com:learn6:0.0.1-SNAPSHOT @ /home/janke/workspace/learn6/pom.xml.
+2017-04-19 08:53:28,464 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-04-19 08:53:28,466 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/learn6/src/main/resources
+2017-04-19 08:53:28,480 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-04-19 08:53:28,480 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/learn6/src/test/resources
+2017-04-19 08:53:30,035 [Worker-5] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com:learn6:0.0.1-SNAPSHOT @ /home/janke/workspace/learn6/pom.xml.
+2017-04-19 08:53:46,421 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-04-19 08:53:46,422 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/learn6/src/main/resources
+2017-04-19 08:53:46,425 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-04-19 08:53:46,426 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/learn6/src/test/resources
+2017-04-19 08:54:12,581 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: project-entRisk:project-entRisk:0.0.1-SNAPSHOT @ /home/janke/workspace/project-entpRisk/pom.xml.
+2017-04-19 08:54:13,803 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-04-19 08:54:13,846 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2017-04-19 08:54:13,876 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-04-19 08:54:13,877 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/project-entpRisk/src/test/resources
+2017-04-19 08:54:25,105 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-04-19 08:54:25,109 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2017-04-19 08:54:25,111 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-04-19 08:54:25,112 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/project-entpRisk/src/test/resources
+2017-04-19 08:57:28,496 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-04-19 08:57:28,496 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/learn6/src/main/resources
+2017-04-19 08:57:28,516 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-04-19 08:57:28,516 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/janke/workspace/learn6/src/test/resources

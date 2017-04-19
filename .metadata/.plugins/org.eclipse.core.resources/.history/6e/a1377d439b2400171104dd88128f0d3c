@@ -1,0 +1,7 @@
+eclipse.m2.WorkspacelifecycleMappingsLocation=/home/janke/workspace/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml
+eclipse.m2.defaultRuntime=maven3
+eclipse.m2.globalSettingsFile=/usr/local/maven3/conf/settings.xml
+eclipse.m2.runtimes=maven3
+eclipse.m2.runtimesNodes/maven3/location=/usr/local/maven3
+eclipse.m2.runtimesNodes/maven3/type=EXTERNAL
+eclipse.preferences.version=1

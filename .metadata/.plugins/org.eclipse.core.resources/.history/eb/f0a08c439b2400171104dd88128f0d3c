@@ -1,0 +1,22 @@
+package service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import dao.ContacterDao;
+import entity.Contacter;
+
+@Service
+@Transactional
+public class ContacterServiceImpl implements ContacterService{
+
+	@Autowired
+	@Qualifier("contacterDaoImpl")
+	ContacterDao contacterDao;
+	
+	public  Contacter get(int id){
+		return contacterDao.get(Contacter.class, id);
+	}
+}

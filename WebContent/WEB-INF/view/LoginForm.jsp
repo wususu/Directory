@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form:form commandName="user" action="check" method="post">
+<form:form commandName="user" action="/check" method="post">
 <label for="userName">用户名: </label>
 <form:input path="userName" />
 <label for="passWord">密码: </label>

@@ -2,7 +2,7 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app >
 	<display-name>Archetype Created Web Application</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -17,7 +17,18 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+		<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!-- 最后尝试访问 http://localhost:8080/project-entRisk/test/1 -->
 	<servlet>
@@ -28,9 +39,17 @@
 			<param-value></param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<max-file-size>20848820</max-file-size>
+			<max-request-size>418018841</max-request-size>
+			<file-size-threshold>1048576</file-size-threshold>
+		</multipart-config>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+
 </web-app>

@@ -31,7 +31,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</bean>
@@ -39,7 +38,7 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/image/**" location="/image/" />
 	<mvc:resources mapping="/js/**" location="/js/" />
 
 	  

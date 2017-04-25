@@ -1,19 +1,50 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import entity.Contacter;
-import entity.User;
+import entity.Groups;
 
 @Service
 public interface ContacterService {
 	
 	Contacter get(int id);
+	
+	Contacter get(String name);
+	
 	List<Contacter> getAll();
-	void save(Contacter entity);
-	void update(Contacter entity);
-	void delete(Contacter entity);
+	
+	void save(Contacter contacter);
+	
+	void update(Contacter contacter);
+	
+	void delete(Contacter contacter);
+	
+	List<Contacter> findByName(String name);
+	
+	List<Contacter> findByHomeTel(Integer homeTel);
+	
+	List<Contacter> findByCellphone(Integer cellphone);
+	
+	Set<Groups> getGroups(Contacter contacter);
+	
+	void addGroups(Contacter contacter, List<Groups> groupsList);
+	
+	void addGroups(Contacter contacter, Groups groups);
+	
+	void deleteGroups(Contacter contacter, List<Groups> groupsList);
+	
+	void deleteGroups(Contacter contacter, Groups groups);
+	
+	Boolean findGroups(Contacter contacter, Groups groups);
+	
+	List<Map<String,Object>> getAllContacters();
+	
+	Map<String, Object> getContacterData(Integer contacterId);
+
 	
 }

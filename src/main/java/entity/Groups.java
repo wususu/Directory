@@ -1,20 +1,23 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.json.JSONObject;
+import org.json.JSONString;
+
+import tools.StringUtils;
 
 @Entity
 @Table(name = "groups")
@@ -30,6 +33,9 @@ public class Groups implements Serializable{
 	
 	@Column(name = "name", unique = true)
 	private String name;
+	
+	@Column(name = "count")
+	private Integer contacterCount;
 	
 	@ManyToMany(mappedBy = "groupList", targetEntity=Contacter.class, cascade = CascadeType.ALL)
 	private Set<Contacter> contacterLIst;
@@ -50,6 +56,14 @@ public class Groups implements Serializable{
 		return name;
 	}
 	
+	public Integer getContacterCount(){
+		return contacterCount;
+	}
+	
+	public void setContatcerCount(Integer contacterCount){
+		this.contacterCount = contacterCount;
+	}
+	
 	public Groups() {
 		// TODO Auto-generated constructor stub
 	}
@@ -64,5 +78,23 @@ public class Groups implements Serializable{
 	
 	public void setContacters(Set<Contacter> contacterList) {
 		this.contacterLIst = contacterList;
+	}
+	
+	public void incContacterCount(){
+		contacterCount += 1;
+	}
+	
+	public void decContacterCout(){
+		if (contacterCount > 0) {
+			contacterCount -= 1;
+		}
+	}
+	
+	public Map<String, Object> toMap(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("name", name);
+		map.put("count", contacterCount);
+		return map;
 	}
 }

@@ -1,28 +1,40 @@
 package controller;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.print.DocFlavor.STRING;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Null;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.taglibs.standard.tag.common.xml.IfTag;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import entity.Contacter;
+import entity.Image;
+import entity.ContacterAndImage;
 import entity.Groups;
-import javassist.expr.NewArray;
+import entity.Product;
 import service.ContacterService;
 import service.GroupsService;
+import service.ImageService;
 
 @Controller
 public class TestController {
@@ -36,33 +48,24 @@ public class TestController {
 	@Qualifier("groupsServiceImpl")
 	GroupsService groupsService;
 	
-	private static final Log logger = LogFactory.getLog(TestController.class);
+	@Autowired
+	@Qualifier("imageServiceImpl")
+	ImageService imageService;
 	
-	@RequestMapping(value = "/test_contacter")
-	// 为该方法启动数据库事物, 从额允许检索懒惰集合
+	private static final Log logger = LogFactory.getLog(TestController.class);
+
+	@RequestMapping(value="/test")
 	@Transactional
-	public void testContacter(){
-		logger.info("father, i'am in");
-		
-		List<Contacter> contacters = contacterService.getAll();
-		Iterator<Contacter> iterator2 = contacters.iterator();
-		logger.info(contacters.size());
-		while (iterator2.hasNext()){
-			Contacter contacter = iterator2.next();
-			System.out.println(contacter + contacter.getName());
-		}
-		
-		List<Groups> groups = groupsService.getAll();
-		Iterator<Groups> iterator = groups.iterator();
-		logger.info(groups.size());
-		while (iterator.hasNext()){
-			Groups groups2 = iterator.next();
-			System.out.println(groups2 + groups2.getName());
-		}
-		Integer bb = new Integer(null);
-		System.out.println(bb);
-		
-		logger.info("daddy,i'am out");
+	@ResponseBody
+	public Map<String, String> test(){
+		Contacter contacter = contacterService.get(11);
+		Groups groups = groupsService.get(2);
+		contacterService.deleteGroups(contacter, groups);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("haha", "ok");
+		return map;
 	}
+	
+
 
 }

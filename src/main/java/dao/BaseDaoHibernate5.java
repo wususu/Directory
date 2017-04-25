@@ -1,13 +1,13 @@
 package dao;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -16,7 +16,8 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-    @Override
+	@Override
+    @SuppressWarnings("unchecked")
 	public T get(Class<T > entity, int id){
 		Session session =sessionFactory.getCurrentSession();
 		Serializable object = (Serializable) session.get(entity, id);
@@ -24,12 +25,31 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 	}
 	
     @Override
+    @SuppressWarnings("unchecked")
 	public List<T> getAll(Class<T> entity){
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from " +  entity.getSimpleName();
 		Query query = session.createQuery(hql);
-		return query.list();
+		return (List<T>)query.list();
 	}
+    
+    @Override
+    public List<T> findLike(Class<T> entity, String property, String value){
+    		Session session =  sessionFactory.getCurrentSession();
+    		Criteria criteria = session.createCriteria(entity).add(Restrictions.ilike(property, "%" + value + "%"));
+    		@SuppressWarnings("unchecked")	
+    		List<T> list = criteria.list();
+    	return list;
+    }
+    
+    @Override
+    public List<T> findLike(Class<T> entity, String property, Integer value){
+    		Session session =  sessionFactory.getCurrentSession();
+    		Criteria criteria = session.createCriteria(entity).add(Restrictions.sqlRestriction(property.toLowerCase() + " LIKE '%" + value +  "%'"));
+    		@SuppressWarnings("unchecked")	
+    		List<T> list = criteria.list();
+    	return list;
+    }
 	
     @Override
 	public Serializable save(T entity) {

@@ -1,15 +1,17 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,9 +19,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.transaction.annotation.Transactional;
+import org.json.JSONObject;
 
-
+import tools.StringUtils;
 
 @Entity
 @Table(name = "contacter")
@@ -185,4 +187,22 @@ public class Contacter implements Serializable{
 	public String getRemarks() {
 		return remarks;
 	}
+	
+	public Map<String, Object> toMap(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("name", name);
+		map.put("pic", pic);
+		map.put("birthday", birthDay);
+		map.put("remarks", remarks);
+		map.put("homeTel", homeTel);
+		map.put("cellphone", cellphone);
+		map.put("wechat", wechat);
+		map.put("work", work);
+		map.put("mail", mail);
+		map.put("address", address);
+		map.put("zip_code", zipCode);
+		return map;
+	}
+	
 }

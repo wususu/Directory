@@ -22,7 +22,7 @@ public class UserDaoImpl extends BaseDaoHibernate5<User> implements UserDao{
 	public User get(String userName) throws IndexOutOfBoundsException{
 		Session session =sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("userName", userName));
-		List<?>  list = criteria.list(); list.get(0);
+		List<?>  list = criteria.list(); 
 		return (User)list.get(0);
 	}
 }

@@ -1,6 +1,5 @@
 package service;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.GroupsDao;
+import entity.Contacter;
 import entity.Groups;
 
 @Service
@@ -37,5 +37,26 @@ public class GroupsServiceImpl implements GroupsService{
 	
 	public void delete(Groups entity) {
 		groupsDao.delete(entity);
+	}
+	
+	public 	List<Contacter> getContacters(Groups entity){
+		
+		return null;
+	}
+	
+	public void deleteContacter(Contacter entity){
+		
+	}
+	
+	public void deleteContacters(List<Contacter> entityList){
+		
+	}
+	
+	public void addContacter(Contacter entity){
+		
+	}
+	
+	public void addContacters(List<Contacter> entityList){
+		
 	}
 }

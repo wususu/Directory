@@ -76,7 +76,7 @@ public class ContacterServiceImpl implements ContacterService{
 	}
 	
 	@Transactional
-	public void addGroups(Contacter contacter, List<Groups> groupsList){
+	public void addGroups(Contacter contacter, Set<Groups> groupsList){
 		for (Groups groups : groupsList) {
 			addGroups(contacter, groups);
 		}
@@ -94,7 +94,7 @@ public class ContacterServiceImpl implements ContacterService{
 		return groupsSet.contains(groups);
 	}
 	
-	public void deleteGroups(Contacter contacter, List<Groups> groupsList){
+	public void deleteGroups(Contacter contacter, Set<Groups> groupsList){
 		for (Groups groups : groupsList) {
 			deleteGroups(contacter, groups);
 		}

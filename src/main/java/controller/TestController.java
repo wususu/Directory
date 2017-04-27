@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,15 +55,20 @@ public class TestController {
 	
 	private static final Log logger = LogFactory.getLog(TestController.class);
 
+
 	@RequestMapping(value="/test")
 	@Transactional
 	@ResponseBody
-	public Map<String, String> test(){
-		Contacter contacter = contacterService.get(11);
-		Groups groups = groupsService.get(2);
-		contacterService.deleteGroups(contacter, groups);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("haha", "ok");
+	public Map<String, List<Map<String, Object>>> test(){
+		Groups groups = groupsService.get(1);
+		Set<Contacter> contacter = groupsService.getContacters(groups);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, List<Map<String, Object>>> map = new HashMap<String, List<Map<String, Object>>>();
+		
+		for (Contacter contacter2 : contacter) {
+			list.add(contacter2.toMap());
+		}
+		map.put(Contacter.class.getSimpleName(), list);
 		return map;
 	}
 	

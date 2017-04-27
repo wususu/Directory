@@ -32,18 +32,27 @@ public interface ContacterService {
 	
 	Set<Groups> getGroups(Contacter contacter);
 	
-	void addGroups(Contacter contacter, List<Groups> groupsList);
+	void addGroups(Contacter contacter, Set<Groups> groupsList);
 	
 	void addGroups(Contacter contacter, Groups groups);
 	
-	void deleteGroups(Contacter contacter, List<Groups> groupsList);
+	void deleteGroups(Contacter contacter, Set<Groups> groupsList);
 	
 	void deleteGroups(Contacter contacter, Groups groups);
 	
 	Boolean findGroups(Contacter contacter, Groups groups);
 	
+	/**
+	 * 获取所有联系人信息(不包括分组情况)
+	 * @return
+	 */
 	List<Map<String,Object>> getAllContacters();
 	
+	/**
+	 * 根据id获取一个联系人详细信息(包括分组情况)
+	 * @param contacterId
+	 * @return
+	 */
 	Map<String, Object> getContacterData(Integer contacterId);
 
 	

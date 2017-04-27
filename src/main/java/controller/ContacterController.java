@@ -130,9 +130,11 @@ public class ContacterController {
 	 */
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Map<String, Object>> getAllContacter(){
+	public Map<String, List<Map<String, Object>>> getAllContacter(){
 		List<Map<String, Object>> list  = contacterService.getAllContacters();
-		return list;
+		Map<String, List<Map<String, Object>>> response = new HashMap<String, List<Map<String, Object>>>();
+		response.put(Contacter.class.getSimpleName(), list);
+		return response;
 	}
 	
 	/**

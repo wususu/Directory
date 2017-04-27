@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,10 @@ public class GroupsServiceImpl implements GroupsService{
 	@Qualifier("groupsDaoImpl")
 	GroupsDao groupsDao;
 	
+	@Autowired
+	@Qualifier("contacterServiceImpl")
+	ContacterService contacterService;
+	
 	public Groups get(int id){
 		return groupsDao.get(Groups.class, id);
 	}
@@ -27,36 +32,40 @@ public class GroupsServiceImpl implements GroupsService{
 		return groupsDao.getAll(Groups.class);
 	}
 	
-	public void save(Groups entity) {
-		groupsDao.save(entity);
+	public void save(Groups groups) {
+		groupsDao.save(groups);
 	}
 	
-	public void update(Groups entity) {
-		groupsDao.update(entity);
+	public void update(Groups groups) {
+		groupsDao.update(groups);
 	}
 	
-	public void delete(Groups entity) {
-		groupsDao.delete(entity);
+	public void delete(Groups groups) {
+		groupsDao.delete(groups);
 	}
 	
-	public 	List<Contacter> getContacters(Groups entity){
-		
-		return null;
+	public 	Set<Contacter> getContacters(Groups groups){
+		Set<Contacter> contacterSet = groups.getContacterList();
+		return contacterSet;
 	}
 	
-	public void deleteContacter(Contacter entity){
-		
+	public void deleteContacter(Groups groups, Contacter contacter){
+		contacterService.deleteGroups(contacter, groups);
 	}
 	
-	public void deleteContacters(List<Contacter> entityList){
-		
+	public void deleteContacters(Groups groups, Set<Contacter> contactersList){
+		for (Contacter contacter : contactersList) {
+			contacterService.deleteGroups(contacter, groups);
+		}
 	}
 	
-	public void addContacter(Contacter entity){
-		
+	public void addContacter(Groups groups, Contacter contacter){
+		contacterService.addGroups(contacter, groups);
 	}
 	
-	public void addContacters(List<Contacter> entityList){
-		
+	public void addContacters(Groups groups, Set<Contacter> contactersList){
+		for (Contacter contacter : contactersList) {
+			contacterService.addGroups(contacter, groups);
+		}
 	}
 }

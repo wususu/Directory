@@ -53,10 +53,10 @@ public class PageGenerator {
 	
 	public int getStartIndex(int page){
 		if (page <= totalPage) {
-			int start = (page - 1) * numPerPage + 1;
+			int start = (page - 1) * numPerPage;
 			return start;
 		}else {
-			return (totalPage - 1) * numPerPage + 1;
+			return (totalPage - 1) * numPerPage;
 		}
 	}
 	

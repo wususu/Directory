@@ -73,6 +73,13 @@ public class JSONFormatService {
 		return response;
 	}
 	
+	public HashMap<String, Object> formatGroupsListToJSON(List<Groups> groupsLIst){
+		HashMap<String, Object> response = new HashMap<String, Object>();
+		List<HashMap<String, Object>> contactersJSONList =  groupsFormatService.entitysToJSONList( groupsLIst);
+		response.put("groups_list", contactersJSONList);
+		return response;
+	}
+	
 	public HashMap<String, Object> getErrorMessage(String errorInfo) {
 			HashMap<String, Object> errorMsg = new HashMap<String, Object>();
 			errorMsg.put("error_info", errorInfo);

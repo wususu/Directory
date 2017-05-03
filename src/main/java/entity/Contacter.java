@@ -25,7 +25,7 @@ import tools.StringUtils;
 
 @Entity
 @Table(name = "contacter")
-public class Contacter  implements Serializable{
+public class Contacter extends BaseEntity  implements Serializable{
 	
 	private static final long serialVersionUID = 3124L;
 	

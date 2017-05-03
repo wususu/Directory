@@ -15,10 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import dao.ContacterDao;
 import entity.Contacter;
 import entity.Groups;
+import tools.PageGenerator;
 
 @Service
 @Transactional
 public class ContacterServiceImpl implements ContacterService{
+	
+	final private static int numPerPage = 3;
 
 	@Autowired
 	@Qualifier("contacterDaoImpl")
@@ -106,20 +109,9 @@ public class ContacterServiceImpl implements ContacterService{
 		if (groupsSet.remove(groups)) {
 			groups.decContacterCout();
 		}
-	}
+	}	
 	
-	
-	public List<Map<String,Object>> getAllContacters(){
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		List<Contacter> contactersList = getAll();
-		for (Contacter contacter : contactersList) {
-			list.add(contacter.toMap());
-		}
-		return list;
-	}
-	
-	
-	public Map<String, Object> getContacterData(Integer contacterId){
+	public Map<String, Object> getContacterDetailsJSON(Integer contacterId){
 		Map<String, Object> MapData = new HashMap<String, Object>();
 		ArrayList<Map<String, Object>> groupsArray = new ArrayList<Map<String, Object>>();
 		final Contacter contacter = get(contacterId);
@@ -130,5 +122,17 @@ public class ContacterServiceImpl implements ContacterService{
 		MapData.put("contacter", contacter.toMap());
 		MapData.put("groups", groupsArray);
 		return MapData;
+	}
+	
+	public List<Contacter> getContacterByPage(int page){
+		PageGenerator generator = new PageGenerator(numPerPage);
+		System.out.println(generator.getStartIndex(page) + "  " + generator.getNumPerPage() );
+		List<Contacter> contacterList =  (List<Contacter>)contacterDao.getByPage(Contacter.class, generator.getStartIndex(page), generator.getNumPerPage());
+		for (Contacter contacter : contacterList) {
+			System.out.println(contacter.getId() + " " + contacter.getName());
+		}
+		return contacterList;
+
+
 	}
 }

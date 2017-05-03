@@ -21,7 +21,7 @@ import tools.StringUtils;
 
 @Entity
 @Table(name = "groups")
-public class Groups implements Serializable{
+public class Groups extends BaseEntity implements Serializable{
 
 	private static final long serialVersionUID = 5234L;
 	

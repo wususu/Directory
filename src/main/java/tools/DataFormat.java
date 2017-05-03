@@ -2,10 +2,8 @@ package tools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 
 import org.springframework.stereotype.Service;
 
@@ -22,23 +20,29 @@ import entity.BaseEntity;
 @Service
 public class DataFormat<T extends BaseEntity, M1 extends HashMap<String, Object>>{
 	
-	public static  <T> String getKeyName(T entity) {
+	public  String getKeyName(T entity) {
 		return entity.getClass().getSimpleName().toLowerCase();
 	}
 	
-	public static  <T> String getKeyName(Class<T> entity) {
-		return entity.getSimpleName().toLowerCase() + "_list";
-	}
-	
+	/**
+	 * 对象装化为json字符串
+	 * @param entity
+	 * @return HashMap<String, JSONString>
+	 */
 	public   M1  entityToJSONMap(T entity){
 		@SuppressWarnings("unchecked")
 		M1 entityMap = (M1) entity.toMap();
     	return entityMap;
 	}
 	
-	public  List<M1> entitysToJSONList(List<T> tList){
+	/**
+	 * 一组对象转化为json字符串
+	 * @param entityList
+	 * @return List<HashMap<String, JSONString>>
+	 */
+	public  List<M1> entitysToJSONList(List<T> entityList){
 		List<M1>  tMapList = new ArrayList<>();
-		for (T t : tList) {
+		for (T t : entityList) {
 			M1 tMap = (M1)entityToJSONMap(t);
 			tMapList.add(tMap);
 		}

@@ -42,18 +42,8 @@ public interface ContacterService {
 	
 	Boolean findGroups(Contacter contacter, Groups groups);
 	
-	/**
-	 * 获取所有联系人信息(不包括分组情况)
-	 * @return
-	 */
-	List<Map<String,Object>> getAllContacters();
-	
-	/**
-	 * 根据id获取一个联系人详细信息(包括分组情况)
-	 * @param contacterId
-	 * @return
-	 */
-	Map<String, Object> getContacterData(Integer contacterId);
+	List<Contacter> getContacterByPage(int page);
+
 
 	
 }

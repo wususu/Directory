@@ -1,17 +1,12 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.loader.custom.Return;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.mail.handlers.message_rfc822;
 
 import entity.Contacter;
 import entity.ContacterAndImage;
@@ -34,7 +28,7 @@ import entity.Groups;
 import service.ContacterService;
 import service.GroupsService;
 import service.ImageService;
-import tools.StringUtils;
+import service.JSONFormatService;
 
 @Controller
 @RequestMapping(value="/contacter")
@@ -51,6 +45,9 @@ public class ContacterController {
 	@Autowired
 	@Qualifier("groupsServiceImpl")
 	private GroupsService groupsService;
+	
+	@Autowired
+	private JSONFormatService jsonFormatService;
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addContacterForm(final Model model, final HttpServletRequest request){
@@ -118,9 +115,21 @@ public class ContacterController {
 	 */
 	@RequestMapping(value="/get/{id}", method=RequestMethod.GET)
 	@ResponseBody
+	@Transactional
 	public Map<String, Object> getContacter(@PathVariable final Integer id){
-		Map<String, Object> response =  contacterService.getContacterData(id);
-		return response;
+		Contacter contacter = contacterService.get(id);
+		if (contacter == null) {
+			return jsonFormatService.getErrorMessage("id is out of range");
+		}
+		return jsonFormatService.getContacterDetails(contacter);
+	}
+	
+	
+	@RequestMapping(value="/page/{page}", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getCOntactersByPage(@PathVariable int page){
+		List<Contacter> list = contacterService.getContacterByPage(page);
+		return jsonFormatService.formatContactersListToJSON(list);
 	}
 	
 	/**
@@ -130,11 +139,9 @@ public class ContacterController {
 	 */
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, List<Map<String, Object>>> getAllContacter(){
-		List<Map<String, Object>> list  = contacterService.getAllContacters();
-		Map<String, List<Map<String, Object>>> response = new HashMap<String, List<Map<String, Object>>>();
-		response.put(Contacter.class.getSimpleName(), list);
-		return response;
+	public Map<String, Object> getAllContacter(){
+		List<Contacter> contactersList = contacterService.getAll();
+		return jsonFormatService.formatContactersListToJSON(contactersList);
 	}
 	
 	/**

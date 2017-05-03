@@ -7,6 +7,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +17,14 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Override
+	public Long count(Class<T> entity){
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(entity);
+		Long num = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+		return num;
+	}
 	
 	@Override
     @SuppressWarnings("unchecked")
@@ -32,6 +42,19 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 		Query query = session.createQuery(hql);
 		return (List<T>)query.list();
 	}
+    
+    @Override
+	public List<T> getByPage(Class<T> entity, int start, int max){
+    		Session session = sessionFactory.getCurrentSession();
+    		Criteria criteria = session.createCriteria(entity);
+        		criteria.setMaxResults(max);
+    		criteria.setFirstResult(start);
+    		@SuppressWarnings("unchecked")
+		List<T> list = criteria.list();
+    		System.out.println(list);
+    	return list;
+    }
+
     
     @Override
     public List<T> findLike(Class<T> entity, String property, String value){

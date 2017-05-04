@@ -21,53 +21,44 @@ import tools.PageGenerator;
 @Transactional
 public class ContacterServiceImpl implements ContacterService{
 	
-	final private static int numPerPage = 3;
+	final private static int numPerPage = 6;
 
 	@Autowired
 	@Qualifier("contacterDaoImpl")
 	ContacterDao contacterDao;
 	
-	@Override
 	public  Contacter get(int id){
 		return contacterDao.get(Contacter.class, id);
 	}
 	
-	@Override
 	public Contacter get(String name){
 		return contacterDao.get(Contacter.class, name);
 	}
 	
-	@Override
 	public List<Contacter> getAll(){
 		return contacterDao.getAll(Contacter.class);
 	}
 	
-	@Override
 	public void save(Contacter contacter){
 		contacterDao.save(contacter);
 	}
 	
-	@Override
 	public void update(Contacter contacter) {
 		contacterDao.update(contacter);
 	}
 	
-	@Override
 	public void delete(Contacter contacter) {
 		contacterDao.delete(contacter);
 	}
 	
-	@Override
 	public List<Contacter> findByName(String name){
 		return contacterDao.findByColumn(Contacter.class, "name",  name);
 	}
 	
-	@Override
 	public List<Contacter> findByHomeTel(Integer homeTel){
 		return contacterDao.findByColumn(Contacter.class, "home_tel", homeTel );
 	}
 	
-	@Override
 	public List<Contacter> findByCellphone(Integer cellphone){
 		return contacterDao.findByColumn(Contacter.class, "cellphone", cellphone);
 	}

@@ -7,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Override
 	public Long count(Class<T> entity){
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(entity);
@@ -26,7 +24,6 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 		return num;
 	}
 	
-	@Override
     @SuppressWarnings("unchecked")
 	public T get(Class<T > entity, int id){
 		Session session =sessionFactory.getCurrentSession();
@@ -34,7 +31,6 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 		return (T) object;
 	}
 	
-    @Override
     @SuppressWarnings("unchecked")
 	public List<T> getAll(Class<T> entity){
 		Session session = sessionFactory.getCurrentSession();
@@ -43,7 +39,6 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
 		return (List<T>)query.list();
 	}
     
-    @Override
 	public List<T> getByPage(Class<T> entity, int start, int max){
     		Session session = sessionFactory.getCurrentSession();
     		Criteria criteria = session.createCriteria(entity);
@@ -55,9 +50,7 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
     	return list;
     }
 
-    
-    @Override
-    public List<T> findLike(Class<T> entity, String property, String value){
+	public List<T> findLike(Class<T> entity, String property, String value){
     		Session session =  sessionFactory.getCurrentSession();
     		Criteria criteria = session.createCriteria(entity).add(Restrictions.ilike(property, "%" + value + "%"));
     		@SuppressWarnings("unchecked")	
@@ -65,7 +58,6 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
     	return list;
     }
     
-    @Override
     public List<T> findLike(Class<T> entity, String property, Integer value){
     		Session session =  sessionFactory.getCurrentSession();
     		Criteria criteria = session.createCriteria(entity).add(Restrictions.sqlRestriction(property.toLowerCase() + " LIKE '%" + value +  "%'"));
@@ -74,20 +66,17 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>{
     	return list;
     }
 	
-    @Override
 	public Serializable save(T entity) {
 		Session session = sessionFactory.getCurrentSession();
 		Serializable serializable = session.save(entity);
 		return serializable;
 	}
     
-    @Override
 	public void update(T entity) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(entity);
 	}
 	
-    @Override
 	public void delete(T entity) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(entity);

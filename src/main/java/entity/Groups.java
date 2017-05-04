@@ -14,10 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.json.JSONObject;
-import org.json.JSONString;
-
-import tools.StringUtils;
 
 @Entity
 @Table(name = "groups")

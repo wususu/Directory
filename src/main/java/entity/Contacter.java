@@ -1,10 +1,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,9 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.json.JSONObject;
 
-import tools.StringUtils;
 
 @Entity
 @Table(name = "contacter")

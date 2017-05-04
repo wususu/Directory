@@ -1,18 +1,8 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.acl.Group;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import javax.persistence.TableGenerator;
-import javax.print.DocFlavor.STRING;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
+
+
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,22 +55,10 @@ public class TestController {
 	private static final Log logger = LogFactory.getLog(TestController.class);
 
 
-	@RequestMapping(value="/test")
-	@Transactional
-	@ResponseBody
-	public HashMap<String, Object> test(){
-		Contacter contacter = contacterService.get(1);
-		return jsonFormatService.getContacterDetails(contacter);
-	}
 	
-	@RequestMapping(value="/test1/{page}")
-	@ResponseBody
-	@Transactional
-	public Object test1(@PathVariable Integer page){
-		Object list = contacterService.getContacterByPage(page);
-		return list;
+	@RequestMapping(value="/")
+	public String test(){
+		return "Index";
 	}
-	
-
 
 }

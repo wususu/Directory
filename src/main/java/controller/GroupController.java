@@ -43,4 +43,5 @@ public class GroupController {
 		}
 		return jsonFormatService.getGroupDetails(groups);
 	}
+
 }

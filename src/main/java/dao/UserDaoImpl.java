@@ -18,7 +18,6 @@ public class UserDaoImpl extends BaseDaoHibernate5<User> implements UserDao{
 	private SessionFactory sessionFactory;
 	
 //	根据用户名查找用户
-	@Override
 	public User get(String userName) throws IndexOutOfBoundsException{
 		Session session =sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq("userName", userName));

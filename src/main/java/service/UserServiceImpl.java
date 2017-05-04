@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService{
 	@Qualifier("userDaoImpl")
 	UserDao userDao;
 	
-	@Override
 	public User get(Integer id){
 		return userDao.get(User.class, id);
 	}

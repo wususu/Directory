@@ -19,7 +19,6 @@ public class ContacterDaoImpl extends BaseDaoHibernate5<Contacter> implements Co
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Override
 	public Contacter get(Class<Contacter> entity, String name) throws IndexOutOfBoundsException{
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(entity).add(Restrictions.eq("name", name));
@@ -27,23 +26,16 @@ public class ContacterDaoImpl extends BaseDaoHibernate5<Contacter> implements Co
 		return (Contacter)list.get(0);
 	}
 	
-	@Override
 	public List<Contacter> findByColumn(Class<Contacter> entity,String property, String matchValue){
 		return findLike(entity, property, matchValue);
 	}
 	
-	@Override
 	public List<Contacter> findByColumn(Class<Contacter> entity,String property, Integer matchValue){
 		return findLike(entity, property, matchValue);
 	}
 
-	@Override
 	@Transactional
 	public void addGroups(Contacter contacter, Groups groups){
 		contacter.getGroupList().add(groups);
 	}
-
-
-
-	
 }

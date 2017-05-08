@@ -1,68 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 
+
+<div class="ui raised very padded text container segment contacter_form_container">
+<form:form  class="ui contacter_form " commandName="contacterAndImage"  method="post" enctype="multipart/form-data">
+
+  <h4 class="ui dividing header">Contacter Information</h4>
+  
+  <div class="field">
+ 		 <label for="image">头像:</label>
+ 		 <div class="seven wide field">
+		<form:input type="file"  name="image" path="image.picture"/>
+		</div>
+  </div>
+
+
+
+  <h4 class="ui dividing header">Billing Information</h4>
+  
+  
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+  <div class="field">
+    <label>Name</label>
+      <div class="seven wide field">
+      	<form:input name="name" path="contacter.name" placeholder="Name" />
+      </div>
+  </div>
+  
+    <div class="field">
+    <label>Remarks</label>
+      <div class="seven wide field">
+      	<form:input name="Remarks" path="contacter.remarks" placeholder="Remarks" />
+      </div>
+  </div>
+  
 
-<form:form commandName="contacterAndImage" action="${pageContext.request.contextPath}/addContacter" method="post" enctype="multipart/form-data">
-<fieldset>
-			<legend>添加联系人</legend>
-	<p>
-	<label for="image">头像:</label>
-	<form:input type="file"  name="image" path="image.picture"/>
-	</p>
-	
-	<p>
-	<label for="name">姓名:</label>
-	<form:input name="name" path="contacter.name" />
-	</p>
-	<p>
-	<label for="remarks">备注:</label>
-	<form:input name="remarks" path="contacter.remarks" />
-	</p>
-	<p>	
-	<label for="homeTel">家庭电话:</label>
-	<form:input name="homeTel" path="contacter.homeTel"/>
-	</p>
-	<p>
-	<label for="cellphone">移动电话:</label>
-	<form:input name="cellphone" path="contacter.cellphone"/>
-	</p>
-	<p>
-	<label for="wechat">微信号:</label>
-	<form:input name="wechat" path="contacter.wechat"/>
-	</p>
-	<p>
-	<label for="mail">电子邮箱:</label>
-	<form:input name="mail" path="contacter.mail"/>
-	</p>
-	<p>
-	<label for="birthDay">出生日期:</label>
-	<form:input name="birthDay" path="contacter.birthDay" type="date"/>
-	</p>
-	<p>
-	<label for="work">工作单位:</label>
-	<input name="contacterwithimage.contacter.work"/>
-	</p>
-	<p>
-	<label for="address">地址:</label>
-	<input name="contacterwithimage.contacter.address"/>
-	</p>
-	<p>
-	<label for="zipCode">邮编:</label>
-	<input name="contacterwithimage.contacter.zipCode"/>
-	</p>
-	<input id="submit" type="submit" value="添加"/>
-</fieldset>
+  
+      <div class="field">
+    <label>WeChat Number</label>
+      <div class="seven wide field">
+      	<form:input name="weChat" path="contacter.wechat" placeholder="WeChat" />
+      </div>
+  </div>
+  
+    <div class="seven wide field">
+      <label>Home Tel</label>
+      <form:input type="text" name="homeTel" path="contacter.homeTel" maxlength="16" placeholder="home tel"/>
+    </div>
+  
+  <div class="seven wide field">
+      <label>Phone Number</label>
+      <form:input type="number" name="cellphone" path="contacter.cellphone" maxlength="16" placeholder="cellphone #"/>
+    </div>
 
+  <div class="seven wide field">
+      <label>E-mail</label>
+      <form:input type="text" name="mail" path="contacter.mail" maxlength="16" placeholder="mail #"/>
+    </div>
+    
+      <div class="seven wide field">
+      <label>Birthday</label>
+      <form:input type="date" name="birthday" path="contacter.birthDay" maxlength="16" />
+    </div>
+    
+      <div class="field">
+    <label>Address</label>
+      <div class="seven wide field">
+        <form:input  name="address" path="contacter.address" placeholder="Address"/>
+      </div>
+  	</div>
+  	
+  	  <div class="seven wide field">
+      <label>Work</label>
+      <form:input type="text" name="work" path="contacter.work" maxlength="16" />
+    </div>
+  <h4 class="ui dividing header">Billing Information</h4>
+
+  <input type="submit" class="ui button submit_add_contacter" tabindex="0">Submit Order</div>
 </form:form>
-</body>
-</html>
+</div>

@@ -21,7 +21,7 @@ import tools.PageGenerator;
 @Transactional
 public class ContacterServiceImpl implements ContacterService{
 	
-	final private static int numPerPage = 6;
+	final public static int numPerPage = 6;
 
 	@Autowired
 	@Qualifier("contacterDaoImpl")
@@ -83,6 +83,10 @@ public class ContacterServiceImpl implements ContacterService{
 		}
 	}
 	
+	public Long count(){
+		return contacterDao.count(Contacter.class);
+	}
+	
 	public Boolean findGroups(Contacter contacter, Groups groups){
 		Set<Groups> groupsSet =  contacter.getGroupList();
 		return groupsSet.contains(groups);
@@ -123,7 +127,5 @@ public class ContacterServiceImpl implements ContacterService{
 			System.out.println(contacter.getId() + " " + contacter.getName());
 		}
 		return contacterList;
-
-
 	}
 }

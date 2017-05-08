@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.hibernate.jpa.criteria.expression.function.AggregationFunction.COUNT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,7 @@ import entity.Contacter;
 import entity.ContacterAndImage;
 import entity.Groups;
 import service.ContacterService;
+import service.ContacterServiceImpl;
 import service.GroupsService;
 import service.ImageService;
 import service.JSONFormatService;
@@ -63,13 +64,13 @@ public class ContacterController {
 	 * @return
 	 */
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String addContacter(@ModelAttribute final ContacterAndImage test, final HttpServletRequest request, final Model model) {
-		final Contacter contacter = test.getContacter();
-		final MultipartFile picture= test.getImage().getPicture();
+	public String addContacter(@ModelAttribute  ContacterAndImage form, final HttpServletRequest request, final Model model) {
+		final Contacter contacter = form.getContacter();
+		final MultipartFile picture= form.getImage().getPicture();
 		// 保存图片
 		if (!picture.isEmpty() && contacter.getName() != null) {
 			final String picName = imageService.getContacterPicName(contacter.getId(), contacter.getName());
-			final String picPath = request.getServletContext().getRealPath("/image") + "/" +picName;
+			final String picPath = "/home/janke/workspace/Demo/WebContent/WEB-INF/image" + "/" +picName;
 			if (imageService.saveImage(picture, picPath)) {
 				System.out.println(picPath);
 				contacter.setPic(picPath);
@@ -77,7 +78,7 @@ public class ContacterController {
 		}
 		contacterService.save(contacter);
 		model.addAttribute("contacter", contacter);
-		return "redirect:/contacter/"+contacter.getId();
+		return "redirect:/contacter/get/"+contacter.getId();
 	}
 	
 	/**
@@ -127,7 +128,7 @@ public class ContacterController {
 	
 	@RequestMapping(value="/page/{page}", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getCOntactersByPage(@PathVariable int page){
+	public Map<String, Object> getContactersByPage(@PathVariable int page){
 		List<Contacter> list = contacterService.getContacterByPage(page);
 		return jsonFormatService.formatContactersListToJSON(list);
 	}
@@ -198,6 +199,17 @@ public class ContacterController {
 			e.printStackTrace();
 			response.put("result", "error");
 		}
+		return response;
+	}
+	
+	@RequestMapping(value="/count", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Long> getContacterCount(){
+		Map<String, Long> response = new HashMap<String, Long>();
+		Long  count = contacterService.count();
+		Long page = (count + ContacterServiceImpl.numPerPage -1) / ContacterServiceImpl.numPerPage;
+		response.put("page", page);
+		response.put("count", count);
 		return response;
 	}
 }

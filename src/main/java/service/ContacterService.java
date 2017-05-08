@@ -23,6 +23,8 @@ public interface ContacterService {
 	
 	void delete(Contacter contacter);
 	
+	Long count();
+	
 	List<Contacter> findByName(String name);
 	
 	List<Contacter> findByHomeTel(Integer homeTel);

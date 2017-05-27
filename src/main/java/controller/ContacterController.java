@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.jpa.criteria.expression.function.AggregationFunction.COUNT;
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.SavepointManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -82,6 +84,36 @@ public class ContacterController {
 	}
 	
 	/**
+	 * 修改头像
+	 * @param img
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/image/update", method=RequestMethod.POST)
+	public Map<String, String> saveImage(@RequestParam(value="img")MultipartFile img, @RequestParam(value="id") Integer id){
+		Map<String, String> resp = new HashMap<String, String>();
+		if (img.getOriginalFilename().isEmpty()){
+			return null;
+		}else {
+			Contacter contacter = contacterService.get(id);
+			if (!img.isEmpty() && contacter.getName() != null) {
+				final String picName = imageService.getContacterPicName(contacter.getId(), contacter.getName());
+				final String picPath = "/home/janke/workspace/Demo/WebContent/WEB-INF/image" + "/" +picName;
+				if (imageService.saveImage(img, picPath)) {
+					System.out.println(picPath);
+					contacter.setPic(picPath);
+					contacterService.update(contacter);
+					resp.put("result", "success");
+					return resp;
+				}
+			}
+		}
+		resp.put("result", "error");
+		return resp;
+	}
+	
+	/**
 	 * 修改联系人视图
 	 * @param id
 	 * @param model
@@ -98,15 +130,19 @@ public class ContacterController {
 	 * @param contacter
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String updateContacter(@ModelAttribute Contacter contacter){
-		try{
+	public Map<String, String> updateContacter(@ModelAttribute Contacter contacter){
+		Map<String, String> respon = new HashMap<String, String>();
+//		System.out.println(id);
+		if (contacter!=null) {
+			contacter.setPic(contacterService.get(contacter.getId()).getPic());
 			contacterService.update(contacter);
-		}catch ( Exception e) {
-			// TODO: handle exception
-			System.out.println(e.toString());
+			respon.put("result", "success");
+			return respon;
 		}
-		return "redirect:/contacter/"+ contacter.getId();
+		respon.put("result", "error");
+		return respon;
 	}
 	
 	/**
@@ -125,7 +161,11 @@ public class ContacterController {
 		return jsonFormatService.getContacterDetails(contacter);
 	}
 	
-	
+	/**
+	 * 按页获取联系人
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value="/page/{page}", method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getContactersByPage(@PathVariable int page){
@@ -162,7 +202,7 @@ public class ContacterController {
 			Groups groups = groupsService.get(groupId);
 			if (contacterService.findGroups(contacter, groups)) {
 				contacterService.deleteGroups(contacter, groups);
-				response.put("result", "ok");
+				response.put("result", "success");
 			}else {
 				response.put("result", "error");
 			}
@@ -183,17 +223,18 @@ public class ContacterController {
 	@RequestMapping(value="/addGroups", method=RequestMethod.POST)
 	@Transactional
 	@ResponseBody
-	public Map<String, String> addGroups(@RequestParam(name="group_id") Integer groupId,
+	public Map<String, String> addGroups(@RequestParam(name="group_list[]") Integer[] groupIdList,
 			@RequestParam(name="contacter_id") Integer contacterId){
 		Map<String, String> response = new HashMap<String, String>();
-		response.put("result", "error");
 		try{
 			Contacter contacter = contacterService.get(contacterId);
-			Groups groups = groupsService.get(groupId);
-			if (!contacterService.findGroups(contacter, groups)) {
-				contacterService.addGroups(contacter, groups);
-				response.put("result", "ok");
+			for (Integer groupId : groupIdList) {
+				Groups groups = groupsService.get(groupId);
+				if (!contacterService.findGroups(contacter, groups)) {
+					contacterService.addGroups(contacter, groups);
+				}
 			}
+			response.put("result", "success");
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -202,6 +243,10 @@ public class ContacterController {
 		return response;
 	}
 	
+	/**
+	 * 联系人总数
+	 * @return
+	 */
 	@RequestMapping(value="/count", method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Long> getContacterCount(){
@@ -211,5 +256,37 @@ public class ContacterController {
 		response.put("page", page);
 		response.put("count", count);
 		return response;
+	}
+	
+	/**
+	 * 根据号码搜索
+	 * @param matcher
+	 * @return
+	 */
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value="/find/{matcher}")
+	public Object findByPhoneNumber(@PathVariable Integer matcher){
+		List<Contacter> cellPhoneContacter =  contacterService.findByCellphone(matcher);
+		List<Contacter> homeTel = contacterService.findByHomeTel(matcher);
+		for (Contacter contacter : homeTel) {
+			if (!cellPhoneContacter.contains(contacter)) {
+				cellPhoneContacter.add(contacter);
+			}
+		}
+		return jsonFormatService.formatContactersListToJSON(cellPhoneContacter);
+	}
+	
+	/**
+	 * 根据用户名搜索
+	 * @param matcher
+	 * @return
+	 */
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value="/name/{matcher}")
+	public Object findByName(@PathVariable String matcher){
+		List<Contacter> nameContacter =  contacterService.findByName(matcher);
+		return jsonFormatService.formatContactersListToJSON(nameContacter);
 	}
 }

@@ -9,8 +9,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript" src="/Demo/js/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript" src="/Demo/js/myjs.js" ></script>
+<link rel="stylesheet" type="text/css" href="/Demo/css/semantic/dist/semantic.min.css">
+
+<script src="/Demo/css/semantic/dist/semantic.min.js"></script>
+<link  rel="stylesheet" type="text/css" href="/Demo/css/mycss.css">
+
+<style type="text/css">
+input.ui.edit-image.medium.circular.image {
+    width: 250px;
+    height: 250px;
+}
+</style>
 <body>
+
+<form method="post" class="edit-image-form" enctype="multipart/form-data">
+    头像：<input type="file" name="img" /><br/>
+    <input type="image" class= "edit-image ui medium circular image" src="/Demo/image/18" />
+      <button type="button" class="change-image-button" value="修改图片">
+  
+     </form>
+
 <form:form commandName="contacter" action="${pageContext.request.contextPath}/updateContacter" method="post" >
+
+
 <fieldset>
 			<legend>添加联系人</legend>
 	<p>
@@ -55,9 +78,12 @@
 	<label for="zipCode">邮编:</label>
 	<form:input name="zipCode" path="zipCode"/>
 	</p>
-	<input id="submit" type="submit" value="添加"/>
+	<input id="submit" type="submit" value="保存修改"/>
 </fieldset>
 
 </form:form>
+
+<c:import url="Fotter.jsp"></c:import>
+
 </body>
 </html>

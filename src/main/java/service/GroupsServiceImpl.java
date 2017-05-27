@@ -28,6 +28,10 @@ public class GroupsServiceImpl implements GroupsService{
 		return groupsDao.get(Groups.class, id);
 	}
 	
+	public Groups get(String name) {
+		return groupsDao.get(Groups.class, name);
+	}
+	
 	public List<Groups> getAll() {
 		return groupsDao.getAll(Groups.class);
 	}
@@ -67,5 +71,9 @@ public class GroupsServiceImpl implements GroupsService{
 		for (Contacter contacter : contactersList) {
 			contacterService.addGroups(contacter, groups);
 		}
+	}
+	
+	public List<Contacter> getByPage(Groups group,  int start, int max){
+		return groupsDao.getByPage(Contacter.class, group, start, max);
 	}
 }

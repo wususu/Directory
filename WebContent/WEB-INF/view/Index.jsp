@@ -11,45 +11,9 @@
 <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
 <script type="text/javascript" src="js/myjs.js" ></script>
 <link rel="stylesheet" type="text/css" href="css/semantic/dist/semantic.min.css">
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+
 <script src="css/semantic/dist/semantic.min.js"></script>
-<style type="text/css">
-.contacter_detail_container .contacter_form_container{
-	display:none;
-}
-
-.ui.vertical.menu .item:before{
-	width: 0;
-	hight:0;
-}
-.contactertab{
-
-position: absolute;
-    margin: auto;
-    top: 0; left: 0; right: 0; bottom: 0;
-    overflow: auto;
-}
-.ui.vertical.menu{
-float:right!important;
-}
-.page-footer-inner{
-	text-align: center;
-	margin-left: 1rem;
-	    height: 150px;
-}
-.detail-font-size{
-	font-size: x-large;
-}
-.ui.vertical.menu{
-	position: fixed;
-}
-.ui.red.button{
-	float: right;
-}
-</style>
+<link  rel="stylesheet" type="text/css" href="css/mycss.css">
 </head>
 <body>
 
@@ -57,13 +21,16 @@ float:right!important;
 <div class="ui attached stackable menu">
   <div class="ui container">
     <a class="item list_contacter">
-      <i class="home icon"></i> Home
+      <i class="home icon"></i> 联系人
     </a>
     <a class="item add_contacter">
       <i class="grid layout icon"></i> 添加联系人
     </a>
-    <a class="item">
-      <i class="mail icon"></i> Messages
+    <a class="item group-admin">
+      <i class="mail icon"></i> 分组管理
+    </a>
+        <a class="item add_contacter">
+      <i class="grid layout icon"></i> 添加分组
     </a>
     <div class="ui simple dropdown item">
       More
@@ -74,13 +41,31 @@ float:right!important;
         <a class="item"><i class="settings icon"></i> Account Settings</a>
       </div>
     </div>
-    <div class="right item">
-      <div class="ui input"><input type="text" placeholder="Search..."></div>
-    </div>
+
+    
+    <div class="right item ui fluid category search">
+  <div class="ui icon input">
+    <input class="ui input promp search-contacters-tabs" type="text" placeholder="Search contacters...">
+    <i class="search icon"></i>
+    
   </div>
 </div>
+  </div>
+</div>
+<div class="ui search focus search-contactaers">
+	<div class="results transition hidden search-contacters" style="display: block !important;">
+		<div class="category find-like-number">
+			<div class="name ">号码</div>
+			
+			
+		</div>
 
-
+		<div class="category find-like-name">
+			<div class="name">姓名</div>
+			
+			</div>
+		</div>
+</div>
 <div class="ui vertical menu groupstab">
 <div class="groups_cards">
   <a class="active teal item">
@@ -109,6 +94,11 @@ float:right!important;
 <c:import url="ContacterDetail.jsp"></c:import>
 
 
+<c:import url="GroupAdmin.jsp"></c:import>
+
+
+<c:import url="ContacterUpdateForm.jsp"></c:import>
+
 <div class="ui raised very padded text container segment contactertab">
 <div class="ui three column grid contacters_cards">  </div>
  <tfoot>
@@ -121,12 +111,8 @@ float:right!important;
 </div>
 
 
-<footer class="page-footer " style="">
-  <div class="page-footer-inner" style="">
-    <br>
-    <p><a href="/">Contacter List by design</a> is written by <br class="mobile"><a href="/about/vvv">Janke Wu</a> <br class="mobile">and powered by <a href="http://workflower.fi">spring</a>.<br class="mobile"><a href="/posts">Articles</a> / <a href="/projects">Projects</a> / <a href="/feed"><abbr>rss</abbr> feed</a></p>
-  </div>
-</footer>
+<c:import url="Fotter.jsp"></c:import>
+
 
 
 </body>

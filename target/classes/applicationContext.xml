@@ -37,15 +37,16 @@
 
 	<mvc:annotation-driven />
 
-	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/image/**" location="/image/" />
-	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/css/**" location="/WEB-INF/lib/css/" />
+	<mvc:resources mapping="/image/**" location="/WEB-INF/lib/image/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/lib/js/" />
 
 	  
 	<context:component-scan base-package="controller" />
 	<context:component-scan base-package="service" />
 	<context:component-scan base-package="dao" />
 	<context:component-scan base-package="entity" />
+	<context:component-scan base-package="tools" />
 	
 
 </beans>

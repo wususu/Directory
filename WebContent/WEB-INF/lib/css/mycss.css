@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+.group_admin_containter{
+	display: none;
+}
+.contacter_detail_container .contacter_form_container{
+	display:none;
+}
+
+.ui.vertical.menu .item:before{
+	width: 0;
+	hight:0;
+}
+.contactertab{
+
+position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: auto;
+}
+.ui.vertical.menu{
+float:right!important;
+}
+.page-footer-inner{
+	text-align: center;
+	margin-left: 1rem;
+	    height: 150px;
+}
+.detail-font-size{
+	font-size: x-large;
+}
+.ui.vertical.menu{
+	position: fixed;
+}
+.ui.red.button{
+	float: right;
+}
+.ui.yellow.button{
+	float:right;
+}
+.search-contactaers{
+left: 73%;
+}

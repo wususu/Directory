@@ -200,4 +200,14 @@ public class Contacter extends BaseEntity  implements Serializable{
 		return map;
 	}
 	
+	@Override
+	public boolean equals(Object object){
+		if (object != null && object instanceof Contacter) {
+			if (((Contacter)object).getId() == this.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

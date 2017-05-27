@@ -16,6 +16,13 @@ public interface GroupsService {
 	Groups get(int id);
 	
 	/**
+	 * 	根据组名获取分组对象
+	 * @param name
+	 * @return
+	 */
+	Groups get(String name);
+	
+	/**
 	 * 获取所有分组对象
 	 * @return
 	 */
@@ -73,5 +80,7 @@ public interface GroupsService {
 	 * @param entityList
 	 */
 	void addContacters(Groups groups, Set<Contacter> entityList);
+	
+	List<Contacter> getByPage(Groups group,  int start, int max);
 	
 }

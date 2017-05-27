@@ -123,9 +123,6 @@ public class ContacterServiceImpl implements ContacterService{
 		PageGenerator generator = new PageGenerator(numPerPage);
 		System.out.println(generator.getStartIndex(page) + "  " + generator.getNumPerPage() );
 		List<Contacter> contacterList =  (List<Contacter>)contacterDao.getByPage(Contacter.class, generator.getStartIndex(page), generator.getNumPerPage());
-		for (Contacter contacter : contacterList) {
-			System.out.println(contacter.getId() + " " + contacter.getName());
-		}
 		return contacterList;
 	}
 }

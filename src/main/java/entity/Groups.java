@@ -36,6 +36,7 @@ public class Groups extends BaseEntity implements Serializable{
 	@ManyToMany(mappedBy = "groupList", targetEntity=Contacter.class, cascade = CascadeType.ALL)
 	private Set<Contacter> contacterLIst;
 	
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -66,6 +67,7 @@ public class Groups extends BaseEntity implements Serializable{
 	
 	public Groups(String name){
 		this.name = name;
+		this.contacterCount = 0;
 	}
 	
 	public Set<Contacter> getContacterList() {

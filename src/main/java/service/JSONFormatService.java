@@ -25,7 +25,6 @@ public class JSONFormatService {
 	DataFormat<Groups, HashMap<String,Object>> groupsFormatService;
 	
 
-	
 	/**
 	 * 联系人详细信息
 	 * @param contacter

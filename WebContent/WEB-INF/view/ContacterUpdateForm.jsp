@@ -11,14 +11,12 @@
     头像：<input type="file" class="button ui " name="img" />修改头像<br/>
     <input type="image" class= "edit-image ui medium circular image" />
       <input type="button" class="button ui change-image-button" value="保存头像修改">
-  
-     </form>
+</form>
 
 
 <form  class="ui update_contacter_form "  method="post" enctype="multipart"/form-data>
 
   <h4 class="ui dividing header">Contacter Information</h4>
-
     
   <div class="field">
     <label>Name</label>
@@ -34,12 +32,10 @@
       </div>
   </div>
   
-
-  
       <div class="field">
     <label>WeChat Number</label>
       <div class="seven wide field">
-      	<input name="weChat" id="wechat" placeholder="WeChat" />
+      	<input type="text" name="wechat" id="wechat" placeholder="WeChat" />
       </div>
   </div>
   
@@ -50,17 +46,17 @@
   
   <div class="seven wide field">
       <label>Phone Number</label>
-      <input type="number" name="cellphone" id="cellphone" maxlength="32" placeholder="cellphone #"/>
+      <input type="number" name="cellphone" id="cellphone" max="32" placeholder="cellphone #"/>
     </div>
 
   <div class="seven wide field">
       <label>E-mail</label>
-      <input type="text" name="mail" id="mail" maxlength="16" placeholder="mail #"/>
+      <input type="text" name="mail" id="mail" max="16" placeholder="mail #"/>
     </div>
     
       <div class="seven wide field">
       <label>Birthday</label>
-      <input type="date" name="birthday" id="birthday"  maxlength="16" />
+      <input type="date" name="birthDay" id="birthday"  maxlength="16" />
     </div>
     
       <div class="field">
@@ -73,6 +69,11 @@
   	  <div class="seven wide field">
       <label>Work</label>
       <input type="text" name="work" id="work" value="" maxlength="16" />
+    </div>
+    
+    <div class="seven wide field">
+      <label>Zip Code</label>
+      <input type="number" name="zipCode" id="zipCode" placeholder="Zip Code #"/>
     </div>
 
   <input type="submit" value="保存修改信息" class="submit_update_contacter ui button s" tabindex="0">Submit</div>

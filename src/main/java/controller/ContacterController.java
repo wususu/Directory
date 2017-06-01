@@ -1,19 +1,14 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.jpa.criteria.expression.function.AggregationFunction.COUNT;
-import org.hibernate.loader.custom.Return;
-import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.SavepointManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import entity.Contacter;
 import entity.ContacterAndImage;
@@ -292,6 +286,11 @@ public class ContacterController {
 		return jsonFormatService.formatContactersListToJSON(nameContacter);
 	}
 	
+	/**
+	 * 删除联系人
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
@@ -299,11 +298,6 @@ public class ContacterController {
 		System.out.println(id);
 		Map<String,String> respon = new HashMap<String, String>();
 		Contacter contacter = contacterService.get(id);
-		List<Groups> groupList = new ArrayList<Groups>(contacter.getGroupList());
-		for (Groups groups : groupList) {
-			groups.setContatcerCount(groups.getContacterCount()-1);
-		}
-		contacter.setGroups(null);
 		contacterService.delete(contacter);
 		respon.put("result", "success");
 		return respon;

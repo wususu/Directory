@@ -41,7 +41,7 @@
       <div class="field">
     <label>WeChat Number</label>
       <div class="seven wide field">
-      	<form:input name="weChat" path="contacter.wechat" placeholder="WeChat" />
+      	<form:input name="wechat" path="contacter.wechat" placeholder="WeChat" />
       </div>
   </div>
   
@@ -52,7 +52,7 @@
   
   <div class="seven wide field">
       <label>Phone Number</label>
-      <form:input type="number" name="cellphone" path="contacter.cellphone" maxlength="16" placeholder="cellphone #"/>
+      <form:input type="number" name="cellphone" path="contacter.cellphone" placeholder="cellphone #"/>
     </div>
 
   <div class="seven wide field">
@@ -76,6 +76,12 @@
       <label>Work</label>
       <form:input type="text" name="work" path="contacter.work" maxlength="16" />
     </div>
+    
+    <div class="seven wide field">
+      <label>Zip Code</label>
+      <form:input type="number" name="zipCode" path="contacter.zipCode" placeholder="Zip Code #"/>
+    </div>
+    
   <h4 class="ui dividing header">Billing Information</h4>
 
   <input type="submit" class="ui button submit_add_contacter" tabindex="0">Submit Order</div>

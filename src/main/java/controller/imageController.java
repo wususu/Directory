@@ -21,7 +21,7 @@ import service.ContacterService;
 @Controller
 public class imageController {
 	
-	private static final String contacterDefultPicPath = "/home/janke/workspace/Demo/image/funny.jpg";
+	private static final String contacterDefaultPicPath = "/home/janke/workspace/Demo/image/funny.jpg";
 	
 	@Autowired
 	@Qualifier("contacterServiceImpl")
@@ -34,7 +34,7 @@ public class imageController {
 			Contacter contacter = contacterService.get((Integer)id);
 			String imagePath = contacter.getPic();
 			if (imagePath == null) {
-				imagePath = contacterDefultPicPath;
+				imagePath = contacterDefaultPicPath;
 			}
 			
 			File imageFile = new File(imagePath);

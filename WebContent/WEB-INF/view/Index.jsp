@@ -24,23 +24,12 @@
       <i class="home icon"></i> 联系人
     </a>
     <a class="item add_contacter">
-      <i class="grid layout icon"></i> 添加联系人
+      <i class="edit layout icon"></i> 添加联系人
     </a>
     <a class="item group-admin">
-      <i class="mail icon"></i> 分组管理
+      <i class="grid layout icon"></i> 分组管理
     </a>
-        <a class="item add_contacter">
-      <i class="grid layout icon"></i> 添加分组
-    </a>
-    <div class="ui simple dropdown item">
-      More
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <a class="item"><i class="edit icon"></i> Edit Profile</a>
-        <a class="item"><i class="globe icon"></i> Choose Language</a>
-        <a class="item"><i class="settings icon"></i> Account Settings</a>
-      </div>
-    </div>
+
 
     
     <div class="right item ui fluid category search">

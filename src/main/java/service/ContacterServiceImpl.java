@@ -48,6 +48,11 @@ public class ContacterServiceImpl implements ContacterService{
 	}
 	
 	public void delete(Contacter contacter) {
+		List<Groups> groupList = new ArrayList<Groups>(contacter.getGroupList());
+		for (Groups groups : groupList) {
+			groups.setContatcerCount(groups.getContacterCount()-1);
+		}
+		contacter.setGroups(null);
 		contacterDao.delete(contacter);
 	}
 	
@@ -130,5 +135,4 @@ public class ContacterServiceImpl implements ContacterService{
 		List<Contacter> contacterList = new ArrayList<Contacter>(group.getContacterList());
 		return contacterList;
 	}
-
 }

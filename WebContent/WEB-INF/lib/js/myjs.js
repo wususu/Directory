@@ -13,6 +13,13 @@ $(document).ready(function () {
 	get_contacter_count();
 
 	
+	function reflash() {
+		get_all_groups();
+		get_contacter_count();
+		show_contactertab(page);
+		
+	}
+	
 	$(".submit_add_contacter").click(function() {
 		submit_contacter_form();
 		return false;
@@ -117,7 +124,7 @@ $(document).ready(function () {
 				dataType: "json",
 				success: function(data) {
 					if(data.result == 'success'){
-						get_all_groups();
+						reflash();
 
 						alert("删除成功");
 					}else{
@@ -196,7 +203,7 @@ $(document).ready(function () {
 			success: function(data) {
 				if (data.result = "success"){
 					alert("录入成功");
-					location.reload("http://localhost/Demo");   
+//					location.reload("http://localhost/Demo");   
 				}
 			}
 		});
@@ -224,7 +231,7 @@ $(document).ready(function () {
 				success: function(data) {
 					if(data.result = "success"){
 						alert("删除成功");
-						location.reload("http://localhost/Demo");   
+//						location.reload("http://localhost/Demo");   
 					}
 				}
 			})
@@ -234,6 +241,13 @@ $(document).ready(function () {
 	// 修改联系人请求
 	function update_contacter_info(id) {
 		var form = new FormData($(".update_contacter_form")[0]);
+		console.log(form);
+		for (var key of form.keys()) {
+			   console.log(key); 
+		}
+		for (var value of form.values()) {
+			   console.log(value); 
+		}
 		form.append("id", id);
 		$.ajax({
 			url:"contacter/update",
@@ -244,6 +258,7 @@ $(document).ready(function () {
 			success: function(data) {
 					if (data.result == "success") {
 						alert("修改成功");
+//						location.reload("http://localhost/Demo");   
 					}
 			},
 		});
@@ -287,6 +302,7 @@ $(document).ready(function () {
 			});
 			var contacter_id = $(".edit-button").attr("id");
 			contacter_add_groups_request(group_selected, contacter_id);
+			
 		});
 	}
 	
@@ -303,6 +319,7 @@ $(document).ready(function () {
 			success: function(data) {
 				if (data.result == "success") {
 					show_contacter_detail(contacter_id);
+					reflash();
 					alert("分组添加成功");
 				}
 			}
@@ -331,6 +348,8 @@ $(document).ready(function () {
 			success: function(data) {
 				if (data.result == "success") {
 					show_contacter_detail(contacter_id);
+					reflash();
+
 					alert("移出分组成功");
 				}				
 			}
@@ -470,6 +489,7 @@ $(document).ready(function () {
 			$(".contacter_form_container").fadeIn("slow");
 		});
 		$(".list_contacter").click(function() {
+			reflash();
 			$(".contacter_detail_container").hide();
 			$(".contacter_form_container").hide();
 			$('.group_admin_containter').hide();
@@ -580,7 +600,7 @@ $(document).ready(function () {
 		var html = ' <div class="contacter_column column" id="' + id +'">'+
 		    '<div class="ui fluid card">'+
 	      '<div class="image">'+
-	        '<img src="image/' + id +'">'+
+	        '<img src="image/' + id + "?"+ (new Date().getTime()) + '">'+
 	      '</div>'+
 	      '<div class="content">'+
 	       ' <a class="header contacter_name">'+name+'</a>'+
@@ -593,7 +613,7 @@ $(document).ready(function () {
 	
 	function contacter_detail_dom(contacter) {
 		var html = '<tr>'+
-	     '<td><img class="ui medium circular image contacter_image" src="image/'+contacter.id+'"></td>'+
+	     '<td><img class="ui medium circular image contacter_image" src="image/'+contacter.id+ "?"+ (new Date().getTime())+'"></td>'+
 	    '</tr>'+
 	    '<tr>'+
 	      '<td >'+  "NAME"+'</td>'+

@@ -37,7 +37,7 @@ public class Contacter extends BaseEntity  implements Serializable{
 	private Integer homeTel;
 	
 	@Column(name = "cellphone")
-	private Integer cellphone;
+	private Long cellphone;
 	
 	@Column(name = "wechat")
 	private String wechat;
@@ -111,11 +111,11 @@ public class Contacter extends BaseEntity  implements Serializable{
 		return homeTel;
 	}
 	
-	public void setCellphone(Integer cellphone) {
+	public void setCellphone(Long cellphone) {
 		this.cellphone = cellphone;
 	}
 	
-	public Integer  getCellphone() {
+	public Long  getCellphone() {
 		return cellphone;
 	}
 	

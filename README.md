@@ -12,23 +12,23 @@
 
 Image:
 
-![](https://github.com/wususu/Directory/tree/master/pic/联系人列表.png)
+![](https://raw.githubusercontent.com/wususu/Directory/master/pic/联系人列表.png)
 
 > 联系人列表
 
-![](https://github.com/wususu/Directory/tree/master/pic/联系人详情.png)
+![](https://raw.githubusercontent.com/wususu/Directory/master/pic/联系人详情.png)
 
 > 联系人详情页面
 
-![](https://github.com/wususu/Directory/tree/master/pic/搜索.png)
+![](https://raw.githubusercontent.com/wususu/Directory/master/pic/搜索.png)
 
 > 搜索联系人
 
-![](https://github.com/wususu/Directory/tree/master/pic/联系人信息填写修改.png)
+![](https://raw.githubusercontent.com/wususu/Directory/master/pic/联系人信息填写修改.png)
 
 > 搜索联系人信息填写或修改
 
-![](https://github.com/wususu/Directory/tree/master/pic/分组管理.png)
+![](https://raw.githubusercontent.com/wususu/Directory/master/pic/分组管理.png)
 
 
 > 管理分组

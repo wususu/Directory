@@ -8,6 +8,8 @@
     <tbody >
       <h2 class="ui dividing header">Contacter Information</h4>
     <button class="ui right  button yellow floated  edit-button">Edit</button>
+        <button class="ui right  button red floated  contacter-delete-button">Delete</button>
+    
     <div class="contacter_detail detail-font-size"></div>
   	<h2 class="ui dividing header"> Groups</h4>
 	   <div class="contacter_detail_groups detail-font-size">

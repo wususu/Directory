@@ -1,12 +1,17 @@
 $(document).ready(function () {
-	
+	get_all_groups();
+
 	var page=1;
+	var total_count=0;
+
 	$(".contacter_form_container").hide();
 	$(".contacter_detail_container").hide();
 	show_contactertab(page);
 
-	get_all_groups();
+
 	click_action();
+	get_contacter_count();
+
 	
 	$(".submit_add_contacter").click(function() {
 		submit_contacter_form();
@@ -18,15 +23,20 @@ $(document).ready(function () {
 	})
 	
 	// Get Contacter Count
-	$.ajax({
-		type: 'GET',
-		url: "contacter/count",
-		success: function(data) {
-			var html = pagination_dom(page, data.page);
-			$("#contacter_count").html(data.count);
-			$(".pagination").append(html);
-			}
-	});
+	function get_contacter_count() {
+		$.ajax({
+			type: 'GET',
+			url: "contacter/count",
+			success: function(data) {
+				var html = pagination_dom(page, data.page);
+				$(".pagination").empty();
+				$("#contacter_count").empty();
+				$("div.pointing#contacter_count").html(data.count);
+				$(".pagination").append(html);
+				}
+		});
+	}
+
 	
 	//Get  Contacter By Page
 	function show_contactertab(page='', group='') {
@@ -35,7 +45,7 @@ $(document).ready(function () {
 			url  = "contacter/page/";
 		}
 		if(group!=''){
-			url = "groups/get/";
+			url = "contacter/get/group/";
 		}
 		$(".contacters_cards").empty();
 		$.ajax({
@@ -130,6 +140,7 @@ $(document).ready(function () {
 				$("div.group_admin_containter > .groups").empty();
 				$(".groups_cards").empty();
 				group_checkbox_dom(groups_list);
+				$(".groups_cards").append('  <a class="active teal get_groups item">所有联系人<div class="ui teal left pointing label" id="contacter_count"></div></a>');
 				$.each(groups_list, function (key, value) {
 					var id = value.id;
 					var name = value.name;
@@ -172,7 +183,6 @@ $(document).ready(function () {
 		for (var key of form.keys()) {
 			   console.log(key); 
 		}
-		console.log("value");
 		for (var value of form.values()) {
 			   console.log(value); 
 		}
@@ -184,7 +194,10 @@ $(document).ready(function () {
 			processData: false,
 			contentType: false,
 			success: function(data) {
-				console.log(data);
+				if (data.result = "success"){
+					alert("录入成功");
+					location.reload("http://localhost/Demo");   
+				}
 			}
 		});
 		return false;
@@ -196,6 +209,25 @@ $(document).ready(function () {
 			var id = $(this).attr("id");
 			update_contacter_info(id);
 			return false;
+		});
+	}
+	
+	// 删除联系人点击事件
+	function contacter_delete_click() {
+		$("button.contacter-delete-button").click(function() {
+			var contacter_id = $(this).attr("id");
+			$.ajax({
+				url: "contacter/delete",
+				type: 'post',
+				dataType: "json",
+				data: {id: contacter_id},
+				success: function(data) {
+					if(data.result = "success"){
+						alert("删除成功");
+						location.reload("http://localhost/Demo");   
+					}
+				}
+			})
 		});
 	}
 	
@@ -211,7 +243,7 @@ $(document).ready(function () {
 			contentType: false,
 			success: function(data) {
 					if (data.result == "success") {
-						alert("修改成功")
+						alert("修改成功");
 					}
 			},
 		});
@@ -277,6 +309,7 @@ $(document).ready(function () {
 		});
 	}
 	
+	// 移除分组点击
 	function remove_group_click() {
 		$(document).on("click", ".remove-group-button", function() {
 			var contacter_id = $(".edit-button").attr("id");
@@ -285,6 +318,7 @@ $(document).ready(function () {
 		});
 	}
 	
+	// 移除分组请求
 	function contacter_remove_group_request(contacter_id, group_id) {
 		$.ajax({
 			url: "contacter/removeGroups",
@@ -303,6 +337,7 @@ $(document).ready(function () {
 		});
 	}
 	
+	// 点击事件
 	function click_action(){
 		click_init();
 		menu_click();
@@ -316,7 +351,10 @@ $(document).ready(function () {
 		 contacter_add_group_click();
 		 group_checkbox_click();
 		 remove_group_click();
+		 groups_click();
+		 contacter_delete_click();
 	}
+	
 	
 	function click_init() {
 		$(document).click(function() {
@@ -325,6 +363,7 @@ $(document).ready(function () {
 		});
 	}
 	
+	// 页码点击事件
 	function page_click() {
 		$(document).on("click", ".page-select", function() {
 			$('.contactertab').hide();
@@ -334,6 +373,7 @@ $(document).ready(function () {
 		});
 	}
 	
+	// 搜索框点击事件
 	function search_result_click() {
 		$(document).on('click', '.search-cntacter-result', function() {
 			var id = $(this).attr('id');
@@ -341,6 +381,8 @@ $(document).ready(function () {
 		});
 	}
 	
+	
+	// /搜索框
 	function search_click() {
 
 		$('.search-contacters-tabs').keyup(function() {
@@ -389,11 +431,20 @@ $(document).ready(function () {
 		});
 	}
 	
+	
+	// 分组点击事件
 	function groups_click() {
 		$(document).on("click", ".get_groups", function() {
+			$(".get_groups.active").removeClass("active");
+			$(this).addClass("active");
 			$('.contactertab').hide();
 			var group_id = $(this).attr("id");
-			show_contactertab('',group_id);
+			console.log(group_id);
+			if (typeof(group_id) === "undefined") {
+				show_contactertab(1);
+			}else{
+				show_contactertab('',group_id);
+			}
 			$('.contactertab').fadeIn('slow');
 		});
 	}
@@ -467,6 +518,7 @@ $(document).ready(function () {
 	
 	function show_contacter_detail(id) {
 		$("button.edit-button").attr("id", id);
+		$("button.contacter-delete-button").attr("id", id);
 		$("input.submit_update_contacter").attr("id", id);
 		$(".contactertab").hide();
 		$(".contacter_form_container").hide();
@@ -515,7 +567,7 @@ $(document).ready(function () {
 		return html;
 	}
 	
-	// 分组名称
+	// 分组列表dom
 	function groups_dom(id, name, count) {
 		var html = '  <a class="item get_groups" id="'+id+'">'+
 		    name + 
@@ -557,7 +609,7 @@ $(document).ready(function () {
 	    '</tr>'+
 	    '<tr>'+
 	      '<td >'+ "CELLPHONE "+'</td>'+
-	     '<td>'+contacter.cellpone+'</td>'+
+	     '<td>'+contacter.cellphone+'</td>'+
 	    '</tr>'+
 	    '<tr>'+
 	      '<td >'+" HOME-TEL" +'</td>'+
@@ -626,6 +678,6 @@ function remove_checkbox_item(groups) {
 		$("div#"+group.id+".checkbox-item").hide();
 	});
 }
-
+     
 
 

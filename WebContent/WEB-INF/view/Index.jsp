@@ -68,10 +68,7 @@
 </div>
 <div class="ui vertical menu groupstab">
 <div class="groups_cards">
-  <a class="active teal item">
-    所有联系人
-    <div class="ui teal left pointing label" id="contacter_count">1</div>
-  </a>
+
    <a class="item">
    未分组
    	<div class="ui label"  id="unknow_count">12</div>

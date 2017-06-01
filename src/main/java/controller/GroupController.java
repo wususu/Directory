@@ -72,6 +72,7 @@ public class GroupController {
 		System.err.println(id);
 		Groups group = groupsService.get(id);
 		if (group != null) {
+			group.setContacters(null);
 			groupsService.delete(group);
 			resp.put("result", "success");
 		}else {

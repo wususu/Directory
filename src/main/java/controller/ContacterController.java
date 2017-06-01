@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.jpa.criteria.expression.function.AggregationFunction.COUNT;
 import org.hibernate.loader.custom.Return;
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -288,5 +290,33 @@ public class ContacterController {
 	public Object findByName(@PathVariable String matcher){
 		List<Contacter> nameContacter =  contacterService.findByName(matcher);
 		return jsonFormatService.formatContactersListToJSON(nameContacter);
+	}
+	
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public Map<String, String> delete(@RequestParam("id") Integer id){
+		System.out.println(id);
+		Map<String,String> respon = new HashMap<String, String>();
+		Contacter contacter = contacterService.get(id);
+		List<Groups> groupList = new ArrayList<Groups>(contacter.getGroupList());
+		for (Groups groups : groupList) {
+			groups.setContatcerCount(groups.getContacterCount()-1);
+		}
+		contacter.setGroups(null);
+		contacterService.delete(contacter);
+		respon.put("result", "success");
+		return respon;
+	}
+	
+	@ResponseBody
+	@Transactional
+	@RequestMapping(value="/get/group/{groupId}")
+	public Object TTCCLayout(@PathVariable Integer groupId){
+		Groups groups = groupsService.get(groupId);
+		if (groups != null) {
+			return jsonFormatService.formatContactersListToJSON(contacterService.getContacterByGroup(groups));
+		}
+		return null;
 	}
 }

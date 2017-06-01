@@ -121,8 +121,14 @@ public class ContacterServiceImpl implements ContacterService{
 	
 	public List<Contacter> getContacterByPage(int page){
 		PageGenerator generator = new PageGenerator(numPerPage);
-		System.out.println(generator.getStartIndex(page) + "  " + generator.getNumPerPage() );
 		List<Contacter> contacterList =  (List<Contacter>)contacterDao.getByPage(Contacter.class, generator.getStartIndex(page), generator.getNumPerPage());
 		return contacterList;
 	}
+	
+	@Transactional
+	public  List<Contacter> getContacterByGroup(Groups group){
+		List<Contacter> contacterList = new ArrayList<Contacter>(group.getContacterList());
+		return contacterList;
+	}
+
 }

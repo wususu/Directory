@@ -1,5 +1,6 @@
 package service;
 
+import java.security.acl.Group;
 import java.util.List;
 import java.util.Set;
 
@@ -45,6 +46,6 @@ public interface ContacterService {
 	
 	List<Contacter> getContacterByPage(int page);
 
-
+	List<Contacter> getContacterByGroup(Groups group);
 	
 }

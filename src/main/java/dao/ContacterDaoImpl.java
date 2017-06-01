@@ -38,4 +38,5 @@ public class ContacterDaoImpl extends BaseDaoHibernate5<Contacter> implements Co
 	public void addGroups(Contacter contacter, Groups groups){
 		contacter.getGroupList().add(groups);
 	}
+
 }

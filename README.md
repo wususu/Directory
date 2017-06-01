@@ -1,5 +1,9 @@
 ## java课程设计: 通讯录管理系统
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
+[![GitHub issues](https://img.shields.io/github/issues/wususu/Directory.svg)](https://github.com/wususu/Directory/issues)
+[![GitHub forks](https://img.shields.io/github/forks/wususu/Directory.svg)](https://github.com/wususu/Directory/network)
+[![GitHub stars](https://img.shields.io/github/stars/wususu/Directory.svg)](https://github.com/wususu/Directory/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/wususu/Directory.svg)](https://github.com/wususu/Directory/stargazers)
+
 
 - Spring SpringMVC Hibernate JQuery 
 - 支持联系人增删查改
